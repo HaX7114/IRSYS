@@ -500,6 +500,9 @@ public class MainController implements Initializable {
         TOK_POS_TABLE.setItems(setData);
         TOK_TABLE.setItems(setData);
         
+        sortColumnAsc(TOK_COL, TOK_TABLE);
+        sortColumnAsc(TOK_COL_TOK, TOK_POS_TABLE);
+        
     }
     
     void VMTable(List<VectorModel> VM) 
@@ -518,6 +521,7 @@ public class MainController implements Initializable {
         
         VEC_TABLE.setItems(setDataVM);
         
+        sortColumnDsc(SIM_COL, VEC_TABLE);
         
     }
     
@@ -533,6 +537,20 @@ public class MainController implements Initializable {
         sprintQUEIRY.wait(0.2);
         sprintQUEIRY.moveTo(0.1, 0, 0).sprint();
         quieryField.setPromptText("The Query Field Couldn't be Empty !");
+    }
+    
+    void sortColumnDsc(TableColumn C , TableView T)
+    {
+        C.setSortType(TableColumn.SortType.DESCENDING);
+        T.getSortOrder().add(C);
+        T.sort();
+    }
+    
+    void sortColumnAsc(TableColumn C , TableView T)
+    {
+        C.setSortType(TableColumn.SortType.ASCENDING);
+        T.getSortOrder().add(C);
+        T.sort();
     }
     
 

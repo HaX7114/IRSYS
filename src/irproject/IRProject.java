@@ -47,29 +47,6 @@ public class IRProject extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-       MainModel m = new MainModel();
-       DecimalFormat df2 = new DecimalFormat("#.##");
-     int i = 0;
-       
-        m.Quiery = "computer is information";
-        List<Word> wo = m.Words();
-        List<VectorModel> vm= new ArrayList<>(m.ListOfVectors);
-        
-        
-//        for(String w : MainModel.DistinctTokens(m.ListOfTokensID) )
-//        {
-//            //System.out.print("Word content : " + i +  " " + w.word + " " + w.position + " " +w.docID+ " " +w.frequency+"\n");
-//            System.out.println(MainModel.DistinctTokens(m.ListOfTokensID).get(i) + "   "+MainModel.DistinctTokens(m.ListOfTokensID).size());
-//            i++;
-//        }
-//List<String> s = m.ReadFile(Tokenization("computer "), 0);
-for(VectorModel v : vm )
-        {
-            
-            System.out.println(v.getWord() + "   "+ v.getDocID() + "   " + v.getTF() + "   " + v.getIDF() + "   " + v.getSimilarity());
-        }
-       System.out.println(m.DOCSNUMEBR);
-        
     }
     
 }
