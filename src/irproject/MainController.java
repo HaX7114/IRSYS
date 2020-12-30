@@ -147,12 +147,24 @@ public class MainController implements Initializable {
 
     @FXML
     private TableColumn TF_COL;
+    
+    @FXML
+    private TableColumn TFQ_COL;
 
     @FXML
     private TableColumn IDF_COL;
 
     @FXML
     private TableColumn SIM_COL;
+    
+    @FXML
+    private TableColumn VECTORDOC_COL;
+
+    @FXML
+    private TableColumn VECTORQUERY_COL;
+
+    @FXML
+    private TableColumn SIMILARITY_COL;
     //END OF TABLES
     
     @FXML
@@ -509,19 +521,24 @@ public class MainController implements Initializable {
     {
         for(VectorModel v : VM)
         {
-            setDataVM.add(new VectorModel(v.getWord(),v.getDocID(),v.getPosition(),v.getTF(),v.getIDF(),v.getSimilarity()));
+            setDataVM.add(new VectorModel(v.getWord(),v.getDocID(),v.getPosition(),v.getTF(),v.getTFQ(),v.getIDF(),v.getSimilarity()
+                    ,v.getVectorDoc(),v.getVectorQuery(),v.getSim()));
         }
         //VECTORMODEL TABLE
         VECTOK_COL.setCellValueFactory(new PropertyValueFactory<>("Word"));
         DocID_COL.setCellValueFactory(new PropertyValueFactory<>("DocID"));
         VEC_POS_COL.setCellValueFactory(new PropertyValueFactory<>("Position"));
         TF_COL.setCellValueFactory(new PropertyValueFactory<>("TF"));
+        TFQ_COL.setCellValueFactory(new PropertyValueFactory<>("TFQ"));
         IDF_COL.setCellValueFactory(new PropertyValueFactory<>("IDF"));
         SIM_COL.setCellValueFactory(new PropertyValueFactory<>("Similarity"));
+        VECTORDOC_COL.setCellValueFactory(new PropertyValueFactory<>("VectorDoc"));
+        VECTORQUERY_COL.setCellValueFactory(new PropertyValueFactory<>("VectorQuery"));
+        SIMILARITY_COL.setCellValueFactory(new PropertyValueFactory<>("Sim"));
         
         VEC_TABLE.setItems(setDataVM);
         
-        sortColumnDsc(SIM_COL, VEC_TABLE);
+        sortColumnDsc(SIMILARITY_COL, VEC_TABLE);
         
     }
     

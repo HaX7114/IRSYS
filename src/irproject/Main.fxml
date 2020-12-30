@@ -253,8 +253,12 @@
                   <TableColumn fx:id="DocID_COL" prefWidth="180.0" text="Document number" />
                   <TableColumn fx:id="VEC_POS_COL" prefWidth="180.0" text="Position" />
                   <TableColumn fx:id="TF_COL" prefWidth="180.0" text="TF" />
+                  <TableColumn fx:id="TFQ_COL" prefWidth="180.0" text="TFQ" />
                   <TableColumn fx:id="IDF_COL" prefWidth="180.0" text="IDF" />
                   <TableColumn fx:id="SIM_COL" prefWidth="180.0" text="Score" />
+                  <TableColumn fx:id="VECTORDOC_COL" prefWidth="180.0" text="VectorDoc" />
+                  <TableColumn fx:id="VECTORQUERY_COL" prefWidth="180.0" text="VectorQuery" />
+                  <TableColumn fx:id="SIMILARITY_COL" prefWidth="180.0" text="Similarity" />
                </columns></TableView>
             <Label layoutX="136.0" layoutY="238.0" prefHeight="87.0" prefWidth="641.0" text="Vector model" textFill="WHITE">
                <font>

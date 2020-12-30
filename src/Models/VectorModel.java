@@ -15,17 +15,25 @@ public class VectorModel {
     int DocID;
     int Position;
     double TF;
+    double TFQ;
     double IDF;
     double Similarity;
+    double VectorDoc;
+    double VectorQuery;
+    double Sim;
     
-    public VectorModel(String Word ,int DocID , int Position,double TF , double IDF , double Similarity)
+    public VectorModel(String Word ,int DocID , int Position,double TF ,double TFQ, double IDF , double Similarity , double VectorDoc , double VectorQuery ,double Sim)
     {
         this.Word = Word;
         this.DocID = DocID;
         this.Position = Position;
         this.TF = TF;
+        this.TFQ = TFQ;
         this.IDF = IDF;
         this.Similarity = Similarity;
+        this.VectorDoc = VectorDoc;
+        this.VectorQuery = VectorQuery;
+        this.Sim = Sim;
     }
     
     public void setWord(String Word)
@@ -68,6 +76,17 @@ public class VectorModel {
         return TF;
     }
     
+    public void setTFQ(double TFQ)
+    {
+        this.TFQ = TFQ;
+    }
+    
+    public double getTFQ()
+    {
+        return TFQ;
+    }
+    
+    
     public void setIDF(double IDF)
     {
         this.IDF = IDF;
@@ -86,6 +105,36 @@ public class VectorModel {
     public double getSimilarity()
     {
         return Similarity;
+    }
+    
+    public void setVectorDoc(double VectorDoc)
+    {
+        this.VectorDoc = VectorDoc;
+    }
+    
+    public double getVectorDoc()
+    {
+        return VectorDoc;
+    }
+    
+    public void setVectorQuery(double VectorQuery)
+    {
+        this.VectorQuery = VectorQuery;
+    }
+    
+    public double getVectorQuery()
+    {
+        return VectorQuery;
+    }
+    
+    public void setSim(double Sim)
+    {
+        this.Sim = Sim;
+    }
+    
+    public double getSim()
+    {
+        return Sim;
     }
     
 }

@@ -221,6 +221,7 @@ public class MainModel {
     public List<Word> Words()//Returns a list of Word which contains every word with it's data
    {
         List<String> TEMP = ReadFiles(Tokenization(Quiery));
+        List<String> TEMP2 = Tokenization(Quiery);
         List<String> DistinctTokens = DistinctTokens(ListOfTokensID);
         List<String> ReadOneFile ;
         List ListOfWord = new ArrayList<Word>();
@@ -234,8 +235,12 @@ public class MainModel {
         int Frequency = 0;
         int DF = 0;
         double TF = 0;
+        double TFQ = 0;
         double IDF;
         double SIM;
+        double VectorDoc;
+        double VectorQuery;
+        double Similarity;
         try {
             for(String S : ListPathes)
             {
@@ -261,6 +266,12 @@ public class MainModel {
                             TEMP.remove(ClusterChars);
                         }
                         
+                        while(TEMP2.contains(ClusterChars))
+                        {
+                            TFQ++;
+                            TEMP2.remove(ClusterChars);
+                        }
+                        
                         while(ReadOneFile.contains(ClusterChars))
                         {
                             TF++;
@@ -280,10 +291,16 @@ public class MainModel {
                             if(DF != 0)//Because we can not divide on zero
                             {
                                 TF = calcTF(TF);
+                                TFQ = calcTF(TFQ);
                                 IDF = calcIDF(DOCSNUMEBR, DF);
                                 SIM = calcSIM(TF, IDF);
+                                VectorDoc = TF/SummationTF(c);
+                                VectorQuery = TFQ/SummationTFQ();
+                                Similarity = VectorDoc * VectorQuery;
                                 ListOfVectors.add(new VectorModel(ClusterChars, ListIDs.get(c), Position,Double.parseDouble(DF3.format(TF)),
-                                        Double.parseDouble(DF3.format(IDF)), Double.parseDouble(DF3.format(SIM))));
+                                        Double.parseDouble(DF3.format(TFQ)),Double.parseDouble(DF3.format(IDF)), Double.parseDouble(DF3.format(SIM))
+                                        , Double.parseDouble(DF3.format(VectorDoc)), Double.parseDouble(DF3.format(VectorQuery)), Double.parseDouble(DF3.format(Similarity))
+                                ));
                             }
                         }
                             
@@ -293,10 +310,13 @@ public class MainModel {
                         Frequency = 0;
                         DF = 0;
                         TF = 0;
+                        TFQ = 0;
                         TEMP.clear();
+                        TEMP2.clear();
                         ReadOneFile.clear();
                         DistinctTokens.clear();
                         TEMP = ReadFiles(Tokenization(Quiery));
+                        TEMP2 = Tokenization(Quiery);
                         DistinctTokens = DistinctTokens(ListOfTokensID);
                     }
                     
@@ -313,6 +333,12 @@ public class MainModel {
                       TEMP.remove(ClusterChars);
                 }
                 
+                while(TEMP2.contains(ClusterChars))
+                {
+                      TFQ++;
+                      TEMP2.remove(ClusterChars);
+                }
+                        
                 while(ReadOneFile.contains(ClusterChars))
                  {
                       TF++;
@@ -332,10 +358,17 @@ public class MainModel {
                       if(DF != 0)//Because we can not divide on zero
                       {
                                 TF = calcTF(TF);
+                                TFQ = calcTF(TFQ);
                                 IDF = calcIDF(DOCSNUMEBR, DF);
                                 SIM = calcSIM(TF, IDF);
-                                ListOfVectors.add(new VectorModel(ClusterChars, ListIDs.get(c),Position,Double.parseDouble(DF3.format(TF)),
-                                        Double.parseDouble(DF3.format(IDF)), Double.parseDouble(DF3.format(SIM))));
+                                VectorDoc = TF/SummationTF(c);
+                                VectorQuery = TFQ/SummationTFQ();
+                                Similarity = VectorDoc * VectorQuery;
+                                ListOfVectors.add(new VectorModel(ClusterChars, ListIDs.get(c), Position,Double.parseDouble(DF3.format(TF)),
+                                        Double.parseDouble(DF3.format(TFQ)),Double.parseDouble(DF3.format(IDF)), Double.parseDouble(DF3.format(SIM))
+                                        , Double.parseDouble(DF3.format(VectorDoc)), Double.parseDouble(DF3.format(VectorQuery)), Double.parseDouble(DF3.format(Similarity))
+                                ));
+                                
                       }
                 }
                 Chars.removeAll(Chars);
@@ -344,10 +377,13 @@ public class MainModel {
                 Frequency = 0;
                 DF = 0;
                 TF = 0;
+                TFQ = 0;
                 TEMP.clear();
+                TEMP2.clear();
                 ReadOneFile.clear();
                 DistinctTokens.clear();
                 TEMP = ReadFiles(Tokenization(Quiery));
+                TEMP2 = Tokenization(Quiery);
                 DistinctTokens = DistinctTokens(ListOfTokensID);
             }
             
@@ -401,10 +437,10 @@ public class MainModel {
                 }
             }catch(IndexOutOfBoundsException e)
             {
-                Subs.add(Quiery.substring(prefix, suffix));
+                Subs.add(Quiery.substring(prefix, suffix).toLowerCase());
                 break;
             }
-            Subs.add(Quiery.substring(prefix, suffix));
+            Subs.add(Quiery.substring(prefix, suffix).toLowerCase());
             suffix++;
             prefix = suffix;
             
@@ -421,7 +457,7 @@ public class MainModel {
         List<String>TEMP = new ArrayList<>();
         
         int i ;
-        int c = 0;
+        int c;
         String Token;
         
         distinctTokens = distinctTokens.stream().distinct().collect(Collectors.toList()); //Removes the redudant to calculate the df
@@ -442,6 +478,70 @@ public class MainModel {
         
         return TEMP;
         
+    }
+    
+    public  double SummationTFQ ()
+    {
+        double c =0;
+        double summation = 0;
+        int count =0;
+        List<String> s = new ArrayList<>(MainModel.Tokenization(Quiery));
+        List<String> temp = new ArrayList<>(MainModel.Tokenization(Quiery));
+        List<Double> i = new ArrayList<>(); 
+        for(String ss : s)
+        {
+            while(s.contains(ss))
+            {
+                c++;
+                temp.remove(ss);
+                s = temp;
+            }
+            if(c != 0)
+                i.add(calcTF(c));
+            count++;
+            c = 0;
+            
+        }
+        
+        for(double d : i)
+        {
+            summation = summation + d;
+        }
+        
+        return summation;
+                
+    }
+    
+    public  double SummationTF (int docNum)
+    {
+        double c =0;
+        double summation = 0;
+        int count =0;
+        List<String> s = new ArrayList<>(ReadFile(Tokenization(Quiery), docNum));
+        List<String> temp = new ArrayList<>(ReadFile(Tokenization(Quiery), docNum));
+        List<Double> i = new ArrayList<>(); 
+        for(String ss : s)
+        {
+            while(s.contains(ss))
+            {
+                c++;
+                temp.remove(ss);
+                s = temp;
+            }
+            if(c != 0)
+                i.add(calcTF(c));
+            count++;
+            c = 0;
+            
+        }
+        
+        for(double d : i)
+        {
+            summation = summation + d;
+        }
+        
+        return summation;
+                
     }
    
     public static double calcTF(double TF)
