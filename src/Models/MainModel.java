@@ -505,7 +505,7 @@ public class MainModel {
         
         for(double d : i)
         {
-            summation = summation + d;
+            summation = Math.sqrt(Math.pow(summation, 2) + Math.pow(d, 2));
         }
         
         return summation;
@@ -537,7 +537,7 @@ public class MainModel {
         
         for(double d : i)
         {
-            summation = summation + d;
+            summation = Math.sqrt(Math.pow(summation, 2) + Math.pow(d, 2));
         }
         
         return summation;
