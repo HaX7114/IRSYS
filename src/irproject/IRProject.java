@@ -6,12 +6,6 @@
 package irproject;
 
 
-import Models.MainModel;
-import Models.VectorModel;
-import Models.Word;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

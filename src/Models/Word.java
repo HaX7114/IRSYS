@@ -5,8 +5,6 @@
  */
 package Models;
 
-import java.util.List;
-
 /**
  *
  * @author am012

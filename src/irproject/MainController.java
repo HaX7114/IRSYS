@@ -9,7 +9,6 @@ import Models.MainModel;
 import Models.VectorModel;
 import Models.Word;
 import com.kirankunigiri.Sprint.Sprint;
-import com.sun.rowset.internal.Row;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -370,7 +369,7 @@ public class MainController implements Initializable {
                 VEC_BT.setDisable(true);
                 VEC_BT.setOpacity(1);
                 
-                VEC_LB.setText("Calculating Vector...");
+                VEC_LB.setText("Calculating Vectors...");
 
                 sprintVECLB.scaleTo(1.5, 2, 2).sprint();
 
