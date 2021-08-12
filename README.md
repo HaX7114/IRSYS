@@ -1,1 +1,1 @@
-# IRSYS
+# Informational Retrieval System
